@@ -1,0 +1,46 @@
+#!/usr/bin/env node
+
+// Import external modules.
+var opener = require('opener');
+var express = require('express')
+var fs = require('fs');
+var path = require('path');
+
+// Detect and read markdown file in current directory.
+var mdFilePath = null;
+fs.readdir('.', function (err, files) {
+    if (err) throw err;
+    mdFilePath = files.filter(function (file) {
+        return fs.statSync(file).isFile() && /.*\.md$/.test(file);
+    })[0] || null;
+    if (mdFilePath == null) throw new Error('markdown file not found in current directory.');
+
+    // console.log(mdFilePath);
+});
+
+function respondMdContent(req, res) {
+    // console.log('[respondMdContent]');
+    if (mdFilePath != null) {
+        fs.readFile(mdFilePath, 'utf8', function (err, text) {
+            if (err) throw err;
+            res.send(text);
+        })
+    }
+    else {
+        // console.log('[mdFilePath is null]');
+        setTimeout(function () {
+            respondMdContent(req, res);
+        }, 100);
+    }
+}
+
+var app = express();
+
+app.get('/presentation.md', respondMdContent);
+
+var publicDir = path.join(__dirname, '../public');
+app.use(express.static(publicDir));
+
+// Start server and launch web browser.
+app.listen(8080);
+opener('http://localhost:8080/');
