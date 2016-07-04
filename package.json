@@ -2,7 +2,6 @@
   "name": "md-presenter",
   "version": "0.2.0",
   "description": "For when you're giving a presentation in half an hour, and you haven't got the time to open up keynote.",
-  "main": "./bin/md-presenter",
   "repository": {
     "type": "git",
     "url": "git://github.com/jsakamoto/md-presenter.git"
