@@ -6,6 +6,14 @@ var express = require('express')
 var fs = require('fs');
 var path = require('path');
 
+// Setup builtin HTTP server
+var app = express();
+
+app.get('/presentation.md', respondMdContent);
+
+var publicDir = path.join(__dirname, '../public');
+app.use(express.static(publicDir));
+
 // Detect and read markdown file in current directory.
 var mdFilePath = null;
 fs.readdir('.', function (err, files) {
@@ -15,7 +23,8 @@ fs.readdir('.', function (err, files) {
     })[0] || null;
     if (mdFilePath == null) throw new Error('markdown file not found in current directory.');
 
-    // console.log(mdFilePath);
+    // Append the directory where contains markdown content to static files resources.
+    app.use(express.static(path.dirname(mdFilePath)));
 });
 
 function respondMdContent(req, res) {
@@ -33,13 +42,6 @@ function respondMdContent(req, res) {
         }, 100);
     }
 }
-
-var app = express();
-
-app.get('/presentation.md', respondMdContent);
-
-var publicDir = path.join(__dirname, '../public');
-app.use(express.static(publicDir));
 
 // Start server and launch web browser.
 app.listen(8080);
