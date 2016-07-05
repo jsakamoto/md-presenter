@@ -1,6 +1,6 @@
 {
   "name": "md-presenter",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "A command line tool to start presentation on Web browser from markdown file, on the fly.",
   "repository": {
     "type": "git",
