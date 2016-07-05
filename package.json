@@ -1,7 +1,7 @@
 {
   "name": "md-presenter",
-  "version": "0.3.0",
-  "description": "For when you're giving a presentation in half an hour, and you haven't got the time to open up keynote.",
+  "version": "0.3.1",
+  "description": "A command line tool to start presentation on Web browser from markdown file, on the fly.",
   "repository": {
     "type": "git",
     "url": "git://github.com/jsakamoto/md-presenter.git"
