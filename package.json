@@ -1,7 +1,13 @@
 {
   "name": "md-presenter",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "A command line tool to start presentation on Web browser from markdown file, on the fly.",
+  "main": "./lib/md-presenter.js",
+  "files": [
+    "bin",
+    "lib/*.js",
+    "public"
+  ],
   "repository": {
     "type": "git",
     "url": "git://github.com/jsakamoto/md-presenter.git"
